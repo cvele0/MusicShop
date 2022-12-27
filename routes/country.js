@@ -31,20 +31,22 @@ route.get('/countries', (req, res) => {
         .catch( err => res.status(500).json(err) );
 });
 
-/*route.post('/messages', (req, res) => {
-    
-    Country.findOne({ where: { id: req.user.userId } })
+route.post('/countries', (req, res) => {
+    Country.create({ country: req.body.country })
+                    .then( rows => res.json(rows) )
+                    .catch( err => res.status(500).json(err) );
+    /*Country.findOne({ where: { id: req.user.userId } })
         .then( usr => {
             if (usr.admin) {
-                Messages.create({ body: req.body.body, userId: req.user.userId })
+                Country.create({ country: req.body.country })
                     .then( rows => res.json(rows) )
                     .catch( err => res.status(500).json(err) );
             } else {
                 res.status(403).json({ msg: "Invalid credentials"});
             }
         })
-        .catch( err => res.status(500).json(err) );
+        .catch( err => res.status(500).json(err) );*/
         
-});*/
+});
 
 module.exports = route;

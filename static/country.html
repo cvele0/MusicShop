@@ -14,27 +14,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <h2>Users:</h2>
+                    <h2>Countries:</h2>
                     <ul id="usrLst"></ul>
                 </div>
             </div>
         </div>
         <hr>
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <form method="post" action="/api/messages">
-                        <div class="mb-3">
-                            <label for="body" class="form-label">Body</label>
-                            <textarea class="form-control" id="body" name="body" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id="msgBtn">Submit</button>
-                    </form>
-                </div>
-                <div class="col-6">
-                    <h2>Messages:</h2>
-                    <ul id="msgLst"></ul>
-                </div>
+            <div class="col">
+                <form method="post" action="/admin/countries">
+                    <div class="mb-3">
+                        <label for="country1" class="form-label">Country</label>
+                        <input type="text" class="form-control" id="country1" name="country1">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="msgBtn1">Add</button>
+                </form>
+            </div>
+            <div class="col">
+                <form method="post" action="/admin/countries">
+                    <div class="mb-3">
+                        <label for="country2" class="form-label">Country</label>
+                        <input type="text" class="form-control" id="country2" name="country2">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="msgBtn2">Delete</button>
+                </form>
             </div>
         </div>
     </body>
