@@ -1,17 +1,42 @@
-const express = require("express");
-const { sequelize, Order } = require("../models");
+const express = require('express');
+const { sequelize, Order } = require('../models');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const route = express.Router();
+route.use(express.json());
+route.use(express.urlencoded({ extended: true }));
 
-module.exports = route;
+function authToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+  
+    if (token == null) return res.status(401).json({ msg: err });
+  
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    
+        if (err) return res.status(403).json({ msg: err });
+    
+        req.user = user;
+    
+        next();
+    });
+}
 
-route.get("/", async (req, res) => {
-  try {
-    const allOrders = await Order.findAll();
-    return res.json(allOrders);
-  } catch(err) {
-    console.log(err);
-    res.status(500).json({ error: "Greska", data: err });
-  }
+route.use(authToken);
+
+route.get('/orders', (req, res) => {
+  Order.findAll()
+        .then( rows => res.json(rows) )
+        .catch( err => res.status(500).json(err) );
 });
 
+route.post('/orders', (req, res) => {
+  Order.create({ 
+                      address: req.body.address
+                    })
+                    .then( rows => res.json(rows) )
+                    .catch( err => res.status(500).json(err) );
+});
+
+module.exports = route;

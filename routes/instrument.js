@@ -1,17 +1,43 @@
-const express = require("express");
-const { sequelize, Instrument } = require("../models");
+const express = require('express');
+const { sequelize, Instrument } = require('../models');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const route = express.Router();
+route.use(express.json());
+route.use(express.urlencoded({ extended: true }));
 
-module.exports = route;
+function authToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+  
+    if (token == null) return res.status(401).json({ msg: err });
+  
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    
+        if (err) return res.status(403).json({ msg: err });
+    
+        req.user = user;
+    
+        next();
+    });
+}
 
-route.get("/", async (req, res) => {
-  try {
-    const allInstruments = await Instrument.findAll();
-    return res.json(allInstruments);
-  } catch(err) {
-    console.log(err);
-    res.status(500).json({ error: "Greska", data: err });
-  }
+route.use(authToken);
+
+route.get('/instruments', (req, res) => {
+    Instrument.findAll()
+        .then( rows => res.json(rows) )
+        .catch( err => res.status(500).json(err) );
 });
 
+route.post('/instruments', (req, res) => {
+    Instrument.create({ 
+                      name: req.body.name,
+                      brand: req.body.brand
+                    })
+                    .then( rows => res.json(rows) )
+                    .catch( err => res.status(500).json(err) );
+});
+
+module.exports = route;

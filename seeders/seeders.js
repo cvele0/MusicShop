@@ -192,28 +192,28 @@ await queryInterface.bulkInsert('Products', [
   },{
     id: 2,
     price: 350,
-    year: 2020,
+    year: 1980,
     instrumentID: 4,
     countryID: 2
   },
   {
     id: 3,
     price: 1000,
-    year: 2020,
+    year: 2010,
     instrumentID: 3,
     countryID: 4
   },
   {
     id: 4,
     price: 500,
-    year: 2020,
+    year: 2012,
     instrumentID: 5,
     countryID: 5
   },
   {
     id: 5,
     price: 720,
-    year: 2020,
+    year: 2008,
     instrumentID: 2,
     countryID: 1
   },
