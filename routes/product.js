@@ -40,4 +40,10 @@ route.post('/products', (req, res) => {
                     .catch( err => res.status(500).json(err) );
 });
 
+route.delete('/products', async (req, res) => {
+  const product = await Product.findOne({ where: { id: req.body.id } });
+  product.destroy();
+  res.send(product);
+})
+
 module.exports = route;

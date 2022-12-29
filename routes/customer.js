@@ -41,4 +41,10 @@ route.post('/customers', (req, res) => {
                     .catch( err => res.status(500).json(err) );
 });
 
+route.delete('/customers', async (req, res) => {
+    const customer = await Customer.findOne({ where: { id: req.body.id } });
+    customer.destroy();
+    res.send(customer);
+})
+
 module.exports = route;

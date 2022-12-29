@@ -38,16 +38,16 @@ function init() {
   })
 
   btn2.addEventListener("click", function() { // post
-    input2 = document.getElementById("label2").value;
-    if (input2 === "") {
-        window.alert("Please input country name.");
+    input = document.getElementById("idLabel").value;
+    if (input === "") {
+        window.alert("Please input id.");
         return;
     }
     const data = {
-        country: input2
+        id: input
     };
 
-    document.getElementById('label2').value = '';
+    document.getElementById('idLabel').value = '';
 
     fetch('http://127.0.0.1:8000/admin/countries/', {
         method: 'DELETE',
@@ -63,7 +63,6 @@ function init() {
                 alert(el.msg);
             } else {
                 // document.getElementById('usrLst').innerHTML += `<li>Country: ${el.country}</li>`;
-                
                 ucitajContriesUListu();
             }
         });
@@ -117,12 +116,9 @@ function init() {
   });
 }
 
-
-
-
 function ucitajContriesUListu(){
    
-    document.getElementById('usrLst').innerHTML = " ";
+    document.getElementById('usrLst').innerHTML = "";
 
     fetch('http://127.0.0.1:8000/admin/countries', { // get
         headers: {

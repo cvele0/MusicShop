@@ -40,4 +40,10 @@ route.post('/instruments', (req, res) => {
                     .catch( err => res.status(500).json(err) );
 });
 
+route.delete('/instruments', async (req, res) => {
+    const instrument = await Instrument.findOne({ where: { id: req.body.id } });
+    instrument.destroy();
+    res.send(instrument);
+})
+
 module.exports = route;
