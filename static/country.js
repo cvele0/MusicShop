@@ -1,13 +1,14 @@
+var token;
 function init() {
 
   const cookies = document.cookie.split('=');
-  const token = cookies[cookies.length - 1];
+  token = cookies[cookies.length - 1];
 
   const btn1 = document.getElementById('msgBtn1');
   const btn2 = document.getElementById('msgBtn2');
 
   btn1.addEventListener("click", function() { // post
-    input1 = document.getElementById("country1").value;
+    input1 = document.getElementById("label1").value;
     if (input1 === "") {
         window.alert("Please input country name.");
         return;
@@ -16,7 +17,7 @@ function init() {
         country: input1
     };
 
-    document.getElementById('country1').value = '';
+    document.getElementById('label1').value = '';
 
     fetch('http://127.0.0.1:8000/admin/countries', {
         method: 'POST',
@@ -36,20 +37,39 @@ function init() {
         });
   })
 
-  fetch('http://127.0.0.1:8000/admin/countries', { // get
-      headers: {
-          'Authorization': `Bearer ${token}`
-      }
+  btn2.addEventListener("click", function() { // post
+    input2 = document.getElementById("label2").value;
+    if (input2 === "") {
+        window.alert("Please input country name.");
+        return;
+    }
+    const data = {
+        country: input2
+    };
+
+    document.getElementById('label2').value = '';
+
+    fetch('http://127.0.0.1:8000/admin/countries/', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+        .then( res => res.json() )
+        .then( el => {
+            if (el.msg) {
+                alert(el.msg);
+            } else {
+                // document.getElementById('usrLst').innerHTML += `<li>Country: ${el.country}</li>`;
+                
+                ucitajContriesUListu();
+            }
+        });
   })
-      .then( res => res.json() )
-      .then( data => {
-          const lst = document.getElementById('usrLst');
 
-          data.forEach( el => {
-              lst.innerHTML += `<li>Country: ${el.country}</li>`;
-          });
-      });
-
+  ucitajContriesUListu();
   /*fetch('http://127.0.0.1:8000/admin/messages', {
       headers: {
           'Authorization': `Bearer ${token}`
@@ -96,3 +116,25 @@ function init() {
       window.location.href = 'login.html';
   });
 }
+
+
+
+
+function ucitajContriesUListu(){
+   
+    document.getElementById('usrLst').innerHTML = " ";
+
+    fetch('http://127.0.0.1:8000/admin/countries', { // get
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then( res => res.json() )
+        .then( data => {
+            const lst = document.getElementById('usrLst');
+
+            data.forEach( el => {
+                lst.innerHTML += `<li>Country: ${el.country}</li>`;
+            });
+        });
+  }

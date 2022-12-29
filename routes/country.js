@@ -49,4 +49,12 @@ route.post('/countries', (req, res) => {
         
 });
 
+route.delete('/countries', async (req, res) => {
+    
+    const country = await Country.findOne({ where: { id: req.body.country } });
+    
+    country.destroy();
+    res.send(country);
+})
+
 module.exports = route;
