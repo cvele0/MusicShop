@@ -6,6 +6,7 @@ function init() {
 
   const btn1 = document.getElementById('msgBtn1');
   const btn2 = document.getElementById('msgBtn2');
+  const btn3 = document.getElementById('msgBtn3');
 
   btn1.addEventListener("click", function() { // post
     input1 = document.getElementById("label1").value;
@@ -66,55 +67,64 @@ function init() {
                 ucitajContriesUListu();
             }
         });
-  })
+  });
+
+  fetch('http://127.0.0.1:8000/admin/countries', { // get for combobox
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then( res => res.json() )
+    .then( data => {
+        console.log("usao2");
+        data.forEach( el => {
+            var combobox = document.getElementById("combobox");
+            let opt = document.createElement("option");
+            opt.value = el.country;
+            opt.innerHTML = el.country;
+            combobox.appendChild(opt);
+        });
+    });
+
+  btn3.addEventListener("click", function() { // post
+    input = document.getElementById("modLabel").value;
+    if (input === "") {
+        window.alert("Please input country name.");
+        return;
+    }
+    const data = {
+        country: input
+    };
+
+    document.getElementById('modLabel').value = '';
+
+    fetch('http://127.0.0.1:8000/admin/countries/', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data)
+    })
+        .then( res => res.json() )
+        .then( el => {
+            if (el.msg) {
+                alert(el.msg);
+            } else {
+                // document.getElementById('usrLst').innerHTML += `<li>Country: ${el.country}</li>`;
+                ucitajContriesUListu();
+            }
+        });
+  });
 
   ucitajContriesUListu();
-  /*fetch('http://127.0.0.1:8000/admin/messages', {
-      headers: {
-          'Authorization': `Bearer ${token}`
-      }
-  })
-      .then( res => res.json() )
-      .then( data => {
-          const lst = document.getElementById('msgLst');
-
-          data.forEach( el => {
-              lst.innerHTML += `<li>ID: ${el.id}, Body: ${el.body}, User: ${el.user.id}</li>`;
-          });
-      });*/
-
-  /*document.getElementById('msgBtn').addEventListener('click', e => {
-      e.preventDefault();
-
-      const data = {
-          body: document.getElementById('body').value
-      };
-
-      document.getElementById('body').value = '';
-
-      fetch('http://127.0.0.1:8000/api/messages', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify(data)
-      })
-          .then( res => res.json() )
-          .then( el => {
-              if (el.msg) {
-                  alert(el.msg);
-              } else {
-                  document.getElementById('msgLst').innerHTML += `<li>ID: ${el.id}, Body: ${el.body}</li>`;
-              }
-          });
-  });*/
 
   document.getElementById('logout').addEventListener('click', e => {
       document.cookie = `token=;SameSite=Lax`;
       window.location.href = 'login.html';
   });
 }
+
 
 function ucitajContriesUListu(){
    

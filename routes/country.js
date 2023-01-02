@@ -55,4 +55,13 @@ route.delete('/countries', async (req, res) => {
     res.send(country);
 })
 
+route.put('/countries', async (req, res) => {
+    console.log("usao sam");
+    const country = await Country.findOne({ where: { country: req.body.country } });
+    console.log(country);
+    console.log("piseM");
+    console.log(req.param);
+    res.send(country);
+})
+
 module.exports = route;
