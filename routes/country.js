@@ -56,11 +56,9 @@ route.delete('/countries', async (req, res) => {
 })
 
 route.put('/countries', async (req, res) => {
-    console.log("usao sam");
-    const country = await Country.findOne({ where: { country: req.body.country } });
-    console.log(country);
-    console.log("piseM");
-    console.log(req.param);
+    const country = await Country.findOne({ where: { country: req.body.combobox } });
+    country.country = req.body.country;
+    await country.save();
     res.send(country);
 })
 

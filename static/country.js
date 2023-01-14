@@ -88,12 +88,14 @@ function init() {
 
   btn3.addEventListener("click", function() { // post
     input = document.getElementById("modLabel").value;
+    cb = document.getElementById("combobox").value;
     if (input === "") {
         window.alert("Please input country name.");
         return;
     }
     const data = {
-        country: input
+        country: input,
+        combobox: cb
     };
 
     document.getElementById('modLabel').value = '';
