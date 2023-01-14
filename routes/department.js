@@ -45,4 +45,11 @@ route.delete('/departments', async (req, res) => {
     res.send(department);
 })
 
+route.put('/departments', async (req, res) => {
+    const deparment = await Department.findOne({ where: { type: req.body.combobox } });
+    deparment.type = req.body.type;
+    await deparment.save();
+    res.send(deparment);
+})
+
 module.exports = route;
