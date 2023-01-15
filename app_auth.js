@@ -2,6 +2,7 @@ const express = require('express');
 const { sequelize, Users } = require('./models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const Joi = require('joi');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -15,6 +16,13 @@ var corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
+const shema = Joi.object().keys({
+    name: Joi.string().trim().min(5).max(12).required(),
+    email: Joi.string().trim().email().required(),
+    password: Joi.string().min(4).required(),
+    admin: Joi.boolean()
+});
+
 
 app.post('/register', (req, res) => {
 
@@ -24,6 +32,14 @@ app.post('/register', (req, res) => {
         admin: req.body.admin,
         password: bcrypt.hashSync(req.body.password, 10)
     };
+
+    const {error, succ} = shema.validate(obj);
+
+    if (error) {
+        console.log(error);
+        res.send(error);
+        return;
+    } 
 
     Users.create(obj).then( rows => {
         
