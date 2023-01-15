@@ -46,4 +46,14 @@ route.delete('/shops', async (req, res) => {
   res.send(shop);
 })
 
+route.put('/shops', async (req, res) => {
+  nameHere = req.body.combobox.split(";")[0];
+  locationHere = req.body.combobox.split(";")[1];
+  const shop = await Shop.findOne({ where: { name: nameHere, location: locationHere } });
+  shop.name = req.body.name;
+  shop.location = req.body.location;
+  await shop.save();
+  res.send(shop);
+})
+
 module.exports = route;

@@ -45,4 +45,11 @@ route.delete('/manufacturers', async (req, res) => {
     res.send(manufacturer);
 })
 
+route.put('/manufacturers', async (req, res) => {
+    const manufacturer = await Manufacturer.findOne({ where: { name: req.body.combobox } });
+    manufacturer.name = req.body.name;
+    await manufacturer.save();
+    res.send(manufacturer);
+})
+
 module.exports = route;

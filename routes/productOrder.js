@@ -45,4 +45,11 @@ route.delete('/productOrders', async (req, res) => {
   res.send(productOrder);
 })
 
+route.put('/productOrders', async (req, res) => {
+  const productOrder = await ProductOrder.findOne({ where: { price: req.body.combobox } });
+  productOrder.price = req.body.price;
+  await productOrder.save();
+  res.send(productOrder);
+})
+
 module.exports = route;

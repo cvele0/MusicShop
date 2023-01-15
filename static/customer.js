@@ -86,8 +86,8 @@ function init() {
         data.forEach( el => {
             var combobox = document.getElementById("combobox");
             let opt = document.createElement("option");
-            opt.value = el.name + " " + el.username;
-            opt.innerHTML = el.name + " " + el.username;
+            opt.value = el.name + ";" + el.username;
+            opt.innerHTML = el.name + ";" + el.username;
             combobox.appendChild(opt);
         });
     });

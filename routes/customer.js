@@ -48,8 +48,8 @@ route.delete('/customers', async (req, res) => {
 })
 
 route.put('/customers', async (req, res) => {
-    nameHere = req.body.combobox.split(" ")[0];
-    usernameHere = req.body.combobox.split(" ")[1];
+    nameHere = req.body.combobox.split(";")[0];
+    usernameHere = req.body.combobox.split(";")[1];
     const customer = await Customer.findOne({ where: { name: nameHere, username: usernameHere } });
     customer.name = req.body.name;
     customer.username = req.body.username;

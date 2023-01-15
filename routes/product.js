@@ -46,4 +46,14 @@ route.delete('/products', async (req, res) => {
   res.send(product);
 })
 
+route.put('/products', async (req, res) => {
+  yearHere = req.body.combobox.split(";")[0];
+  priceHere = req.body.combobox.split(";")[1];
+  const product = await Product.findOne({ where: { year: yearHere, price: priceHere } });
+  product.year = req.body.year;
+  product.price = req.body.price;
+  await product.save();
+  res.send(product);
+})
+
 module.exports = route;

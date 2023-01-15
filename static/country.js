@@ -69,22 +69,7 @@ function init() {
         });
   });
 
-  fetch('http://127.0.0.1:8000/admin/countries', { // get for combobox
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    .then( res => res.json() )
-    .then( data => {
-        console.log("usao2");
-        data.forEach( el => {
-            var combobox = document.getElementById("combobox");
-            let opt = document.createElement("option");
-            opt.value = el.country;
-            opt.innerHTML = el.country;
-            combobox.appendChild(opt);
-        });
-    });
+  ucitajUComboBox();
 
   btn3.addEventListener("click", function() { // post
     input = document.getElementById("modLabel").value;
@@ -127,6 +112,25 @@ function init() {
   });
 }
 
+function ucitajUComboBox() {
+    //document.getElementById("comobobox").innerHTML = "";
+    fetch('http://127.0.0.1:8000/admin/countries', { // get for combobox
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then( res => res.json() )
+    .then( data => {
+        console.log("usao2");
+        data.forEach( el => {
+            var combobox = document.getElementById("combobox");
+            let opt = document.createElement("option");
+            opt.value = el.country;
+            opt.innerHTML = el.country;
+            combobox.appendChild(opt);
+        });
+    });
+}
 
 function ucitajContriesUListu(){
    

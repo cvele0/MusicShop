@@ -46,4 +46,14 @@ route.delete('/instruments', async (req, res) => {
     res.send(instrument);
 })
 
+route.put('/instruments', async (req, res) => {
+    nameHere = req.body.combobox.split(";")[0];
+    brandHere = req.body.combobox.split(";")[1];
+    const instrument = await Instrument.findOne({ where: { name: nameHere, brand: brandHere } });
+    instrument.name = req.body.name;
+    instrument.brand = req.body.brand;
+    await instrument.save();
+    res.send(instrument);
+})
+
 module.exports = route;

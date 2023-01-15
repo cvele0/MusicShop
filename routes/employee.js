@@ -46,4 +46,14 @@ route.delete('/employees', async (req, res) => {
     res.send(employee);
 })
 
+route.put('/employees', async (req, res) => {
+    nameHere = req.body.combobox.split(";")[0];
+    surnameHere = req.body.combobox.split(";")[1];
+    const employee = await Employee.findOne({ where: { name: nameHere, surname: surnameHere } });
+    employee.name = req.body.name;
+    employee.surname = req.body.surname;
+    await employee.save();
+    res.send(employee);
+})
+
 module.exports = route;
