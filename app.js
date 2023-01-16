@@ -61,6 +61,45 @@ app.get('/', authToken, (req, res) => {
     res.sendFile('index.html', { root: './static' });
 });
 
+app.get('/countries', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'country.html'));
+});
+
+app.get('/customers', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'customer.html'));
+ });
+
+ app.get('/departments', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'department.html'));
+ });
+
+ app.get('/employees', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'employee.html'));
+ });
+
+ app.get('/instruments', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'instrument.html'));
+ });
+
+ app.get('/manufacturers', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'manufacturer.html'));
+ });
+
+ app.get('/orders', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'order.html'));
+ });
+
+ app.get('/products', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'product.html'));
+ });
+
+ app.get('/productOrders', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'productOrder.html'));
+ });
+
+ app.get('/shops', authToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'static', 'shop.html'));
+ });
 
 
 const countryRoutes = require("./routes/country.js");
