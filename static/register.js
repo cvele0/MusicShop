@@ -7,7 +7,7 @@ function init() {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
             password: document.getElementById('password').value,
-            admin: document.getElementById('admin').checked
+            role: document.getElementById('role').value
         };
 
         fetch('http://127.0.0.1:9000/register', {
@@ -17,7 +17,8 @@ function init() {
         })
             .then( res => res.json() )
             .then( el => {
-                document.cookie = `token=${el.token};SameSite=Lax`;
+                //document.cookie = `token=${el.token};SameSite=Lax`;
+                document.cookie = `token=${el.token}; expires=Thu, 18 Dec 2024 12:00:00 UTC; path=/`;
                 //window.location.href = 'index.html';
                 window.location.href = 'homepage.html';
             });

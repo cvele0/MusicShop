@@ -33,9 +33,11 @@ function getCookies(req) {
 };
 
 function authToken(req, res, next) {
+    console.log("usao u auth");
     const cookies = getCookies(req);
     const token = cookies['token'];
   
+    console.log("token " + token);
     if (token == null) return res.redirect(301, '/login');
   
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
@@ -61,43 +63,90 @@ app.get('/', authToken, (req, res) => {
     res.sendFile('index.html', { root: './static' });
 });
 
-app.get('/countries', authToken, (req, res) => {
+
+
+app.get('/country', authToken, (req, res) => {
+    const { role } = req.user;
+    console.log(req.user);
+    if (role !== 'admin' && role!=='moderator') {
+        return res.sendStatus(403);
+    }
     res.sendFile(path.join(__dirname, 'static', 'country.html'));
 });
 
-app.get('/customers', authToken, (req, res) => {
+app.get('/customer', authToken, (req, res) => {
+    console.log("usao u custoemrss");
+    const { role } = req.user;
+    console.log(req.user);
+    if (role !== 'admin' && role!=='moderator') {
+        return res.sendStatus(403);
+    }
     res.sendFile(path.join(__dirname, 'static', 'customer.html'));
  });
 
- app.get('/departments', authToken, (req, res) => {
+ app.get('/department', authToken, (req, res) => {
+    const { role } = req.user;
+    console.log(req.user);
+    if (role !== 'admin' && role!=='moderator') {
+        return res.sendStatus(403);
+    }
     res.sendFile(path.join(__dirname, 'static', 'department.html'));
  });
 
- app.get('/employees', authToken, (req, res) => {
+ app.get('/employee', authToken, (req, res) => {
+    const { role } = req.user;
+    console.log(req.user);
+    if (role !== 'admin' && role!=='moderator') {
+        return res.sendStatus(403);
+    }
     res.sendFile(path.join(__dirname, 'static', 'employee.html'));
  });
 
- app.get('/instruments', authToken, (req, res) => {
+ app.get('/instrument', authToken, (req, res) => {
+    const { role } = req.user;
+    if (role !== 'admin' && role!=='moderator') {
+        return res.sendStatus(403);
+    }
     res.sendFile(path.join(__dirname, 'static', 'instrument.html'));
  });
 
- app.get('/manufacturers', authToken, (req, res) => {
+ app.get('/manufacturer', authToken, (req, res) => {
+    const { role } = req.user;
+    if (role !== 'admin' && role!=='moderator') {
+        return res.sendStatus(403);
+    }
     res.sendFile(path.join(__dirname, 'static', 'manufacturer.html'));
  });
 
- app.get('/orders', authToken, (req, res) => {
+ app.get('/order', authToken, (req, res) => {
+    const { role } = req.user;
+    if (role !== 'admin' && role!=='moderator') {
+        return res.sendStatus(403);
+    }
     res.sendFile(path.join(__dirname, 'static', 'order.html'));
  });
 
- app.get('/products', authToken, (req, res) => {
+ app.get('/product', authToken, (req, res) => {
+    const { role } = req.user;
+    if (role !== 'admin' && role!=='moderator') {
+        return res.sendStatus(403);
+    }
     res.sendFile(path.join(__dirname, 'static', 'product.html'));
  });
 
- app.get('/productOrders', authToken, (req, res) => {
+ app.get('/productOrder', authToken, (req, res) => {
+    const { role } = req.user;
+    if (role !== 'admin' && role!=='moderator') {
+        return res.sendStatus(403);
+    }
     res.sendFile(path.join(__dirname, 'static', 'productOrder.html'));
  });
 
- app.get('/shops', authToken, (req, res) => {
+ app.get('/shop', authToken, (req, res) => {
+    const { role } = req.user;
+    if (role !== 'admin' && role!=='moderator') {
+        return res.sendStatus(403);
+    }
     res.sendFile(path.join(__dirname, 'static', 'shop.html'));
  });
 

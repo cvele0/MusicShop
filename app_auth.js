@@ -26,7 +26,7 @@ const shema = Joi.object().keys({
     name: Joi.string().trim().min(5).max(12).required(),
     email: Joi.string().trim().email().required(),
     password: Joi.string().min(4).required(),
-    admin: Joi.boolean()
+    role: Joi.string()
 });
 
 
@@ -35,7 +35,7 @@ app.post('/register', (req, res) => {
     const obj = {
         name: req.body.name,
         email: req.body.email,
-        admin: req.body.admin,
+        role: req.body.role,
         password: bcrypt.hashSync(req.body.password, 10)
     };
 
@@ -51,7 +51,8 @@ app.post('/register', (req, res) => {
         
         const usr = {
             userId: rows.id,
-            user: rows.name
+            user: rows.name,
+            role: rows.role
         };
 
         const token = jwt.sign(usr, process.env.ACCESS_TOKEN_SECRET);
@@ -60,7 +61,10 @@ app.post('/register', (req, res) => {
         
         res.json({ token: token });
 
-    }).catch( err => res.status(500).json(err) );
+    }).catch( err => {
+        res.status(500).json(err);
+        console.log("error: " + err);
+    } );
 });
 
 app.post('/login', (req, res) => {
@@ -71,13 +75,17 @@ app.post('/login', (req, res) => {
             if (bcrypt.compareSync(req.body.password, usr.password)) {
                 const obj = {
                     userId: usr.id,
-                    user: usr.name
+                    user: usr.name,
+                    role: usr.role
                 };
         
                 const token = jwt.sign(obj, process.env.ACCESS_TOKEN_SECRET);
                 
+                console.log(token);
+
                 res.json({ token: token });
             } else {
+                console.log("nije usao");
                 res.status(400).json({ msg: "Invalid credentials"});
             }
         })

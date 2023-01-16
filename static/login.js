@@ -23,7 +23,8 @@ function init() {
                 if (el.msg) {
                     alert(el.msg);
                 } else {
-                    document.cookie = `token=${el.token};SameSite=Lax`;
+                    //document.cookie = `token=${el.token};SameSite=Lax`;
+                    document.cookie = `token=${el.token}; expires=Thu, 18 Dec 2024 12:00:00 UTC; path=/`;
                     //window.location.href = 'index.html';
                     window.location.href = 'homepage.html';
                 }
