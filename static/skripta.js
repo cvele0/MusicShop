@@ -3,7 +3,7 @@ function init() {
     const cookies = document.cookie.split('=');
     const token = cookies[cookies.length - 1];
 
-    fetch('http://127.0.0.1:8000/admin/users', {
+    fetch('http://127.0.0.1:9090/admin/users', {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -17,7 +17,7 @@ function init() {
             });
         });
 
-    fetch('http://127.0.0.1:8000/admin/messages', {
+    fetch('http://127.0.0.1:9090/admin/messages', {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -40,7 +40,7 @@ function init() {
 
         document.getElementById('body').value = '';
 
-        fetch('http://127.0.0.1:8000/admin/messages', {
+        fetch('http://127.0.0.1:9090/admin/messages', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -27,7 +27,7 @@ function init() {
     document.getElementById('label2').value = '';
     document.getElementById('label3').value = '';
 
-    fetch('http://127.0.0.1:8000/admin/customers', {
+    fetch('http://127.0.0.1:9090/admin/customers', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ function init() {
 
     document.getElementById('idLabel').value = '';
 
-    fetch('http://127.0.0.1:8000/admin/customers/', {
+    fetch('http://127.0.0.1:9090/admin/customers/', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ function init() {
         });
   })
 
-  fetch('http://127.0.0.1:8000/admin/customers', { // get for combobox
+  fetch('http://127.0.0.1:9090/admin/customers', { // get for combobox
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -109,7 +109,7 @@ function init() {
     document.getElementById('modLabel1').value = '';
     document.getElementById('modLabel2').value = '';
 
-    fetch('http://127.0.0.1:8000/admin/customers/', {
+    fetch('http://127.0.0.1:9090/admin/customers/', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -138,7 +138,7 @@ function init() {
 
 function ucitajCustomersUListu() {
     document.getElementById('usrLst').innerHTML = "";
-    fetch('http://127.0.0.1:8000/admin/customers', { // get
+    fetch('http://127.0.0.1:9090/admin/customers', { // get
       headers: {
           'Authorization': `Bearer ${token}`
       }

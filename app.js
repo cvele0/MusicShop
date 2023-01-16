@@ -1,33 +1,22 @@
 const express = require('express');
 const { sequelize } = require('./models');
 const msgs = require('./routes/messages');
-const countries = require('./routes/country');
-const customers = require('./routes/customer');
-const departments = require('./routes/department');
-const employees = require('./routes/employee');
-const instruments = require('./routes/instrument');
-const manufacturers = require('./routes/manufacturer');
-const orders = require('./routes/order');
-const products = require('./routes/product');
-const productOrders = require('./routes/productOrder');
-const shops = require('./routes/shop');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+ }
+
+ app.use(cors(corsOptions));
+
 app.use('/admin', msgs);
-app.use('/admin', countries);
-app.use('/admin', customers);
-app.use('/admin', departments);
-app.use('/admin', employees);
-app.use('/admin', instruments);
-app.use('/admin', manufacturers);
-app.use('/admin', orders);
-app.use('/admin', products);
-app.use('/admin', productOrders);
-app.use('/admin', shops);
 
 function getCookies(req) {
     if (req.headers.cookie == null) return {};

@@ -8,10 +8,16 @@ require('dotenv').config();
 
 const app = express();
 
-var corsOptions = {
+/*var corsOptions = {
     origin: 'http://127.0.0.1:8000',
     optionsSuccessStatus: 200
-}
+}*/
+
+const corsOptions ={
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+ }
 
 app.use(express.json());
 app.use(cors(corsOptions));

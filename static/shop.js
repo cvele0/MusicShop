@@ -24,7 +24,7 @@ function init() {
     document.getElementById('label1').value = '';
     document.getElementById('label2').value = '';
 
-    fetch('http://127.0.0.1:8000/admin/shops', {
+    fetch('http://127.0.0.1:9090/admin/shops', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ function init() {
 
     document.getElementById('idLabel').value = '';
 
-    fetch('http://127.0.0.1:8000/admin/shops/', {
+    fetch('http://127.0.0.1:9090/admin/shops/', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ function init() {
         });
   })
 
-  fetch('http://127.0.0.1:8000/admin/shops', { // get for combobox
+  fetch('http://127.0.0.1:9090/admin/shops', { // get for combobox
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -106,7 +106,7 @@ function init() {
     document.getElementById('modLabel1').value = '';
     document.getElementById('modLabel2').value = '';
 
-    fetch('http://127.0.0.1:8000/admin/shops/', {
+    fetch('http://127.0.0.1:9090/admin/shops/', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ function init() {
 
 function ucitajShopsUListu() {
   document.getElementById('usrLst').innerHTML = "";
-  fetch('http://127.0.0.1:8000/admin/shops', { // get
+  fetch('http://127.0.0.1:9090/admin/shops', { // get
       headers: {
           'Authorization': `Bearer ${token}`
       }

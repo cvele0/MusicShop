@@ -20,7 +20,7 @@ function init() {
 
     document.getElementById('label1').value = '';
 
-    fetch('http://127.0.0.1:8000/admin/countries', {
+    fetch('http://127.0.0.1:9090/admin/countries', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ function init() {
 
     document.getElementById('idLabel').value = '';
 
-    fetch('http://127.0.0.1:8000/admin/countries/', {
+    fetch('http://127.0.0.1:9090/admin/countries/', {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ function init() {
 
     document.getElementById('modLabel').value = '';
 
-    fetch('http://127.0.0.1:8000/admin/countries/', {
+    fetch('http://127.0.0.1:9090/admin/countries/', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ function init() {
 
 function ucitajUComboBox() {
     //document.getElementById("comobobox").innerHTML = "";
-    fetch('http://127.0.0.1:8000/admin/countries', { // get for combobox
+    fetch('http://127.0.0.1:9090/admin/countries', { // get for combobox
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -136,7 +136,7 @@ function ucitajContriesUListu(){
    
     document.getElementById('usrLst').innerHTML = "";
 
-    fetch('http://127.0.0.1:8000/admin/countries', { // get
+    fetch('http://127.0.0.1:9090/admin/countries', { // get
         headers: {
             'Authorization': `Bearer ${token}`
         }
