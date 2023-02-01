@@ -63,8 +63,6 @@ app.get('/', authToken, (req, res) => {
     res.sendFile('index.html', { root: './static' });
 });
 
-
-
 app.get('/country', authToken, (req, res) => {
     const { role } = req.user;
     console.log(req.user);
