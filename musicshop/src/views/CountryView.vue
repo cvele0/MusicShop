@@ -9,6 +9,7 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import CountryImageList from '@/components/imageLists/CountryImageList.vue';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'CountryView',
@@ -17,21 +18,35 @@ export default {
     CountryImageList
   },
 
+  computed: {
+    ...mapState([
+      'countries',
+    ])
+  },
+
   data() {
     return {
-      countries: []
+      //countries: []
     }
   },
 
   // mozda dodati watch() 16.12. 38.00
+  methods: {
+    ...mapActions([
+      'fetchCountries'
+    ])
+  },
 
   mounted() {
-    // fetch(`http://127.0.0.1:9090/admin/countries`)
-    // .then( obj => obj.json() )
-    // .then( res => {
-    //   this.countries = res;
-    //   console.log("radim ispis: " + res);
-    // });
+    if (localStorage.token) {
+      this.fetchCountries();
+    }
+  },
+
+  watch: {
+    $route(nval) {
+
+    }
   }
 }
 </script>
