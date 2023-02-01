@@ -32,10 +32,10 @@
             </b-nav-form>
 
           </b-navbar-nav> -->
-          <b-button class="me-3" variant="outline-primary" @click="redirectToRegister()">Register</b-button>
-          <b-button variant="outline-success" @click="redirectToLogin()">Log in</b-button>
+          <b-button v-if="!this.loggedIn" class="me-3" variant="outline-primary" @click="redirectToRegister()">Register</b-button>
+          <b-button v-if="!this.loggedIn" variant="outline-success" @click="redirectToLogin()">Log in</b-button>
           <!-- <b-button v-if="this.user" variant="outline-success" @click="redirectToProfile()">{{user.name}}</b-button> -->
-          <b-button class="ms-3" variant="outline-danger" @click="log_out()">Log out</b-button>
+          <b-button v-if="this.loggedIn" class="ms-3" variant="outline-danger" @click="log_out()">Log out</b-button>
         </b-collapse>
       </b-navbar>
     </div>
