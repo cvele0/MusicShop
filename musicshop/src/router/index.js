@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import CountryView from '../views/CountryView.vue'
+import InstrumentView from '../views/InstrumentView.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
+import SingleInstrumentView from '../views/SingleInstrumentView.vue'
 
 Vue.use(VueRouter)
 
@@ -11,41 +12,41 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    // meta: {
-    //   authRequired: false
-    // },
+    meta: {
+      authRequired: false
+    },
     component: HomeView
   },
   {
-    path: '/countries',
-    name: 'Contries',
-    // meta: {
-    //   authRequired: true
-    // },
-    component: CountryView
+    path: '/instruments',
+    name: 'Instruments',
+    meta: {
+      authRequired: true
+    },
+    component: InstrumentView
   },
   {
-    path: '/singleCountry/:country',
-    name: 'SingleCountry',
-    // meta: {
-    //   authRequired: true
-    // },
-    component: HomeView
+    path: '/singleInstrument/:name',
+    name: 'SingleInstrument',
+    meta: {
+      authRequired: true
+    },
+    component: SingleInstrumentView
   },
   {
     path: '/login',
     name: 'Login',
-    // meta: {
-    //   authRequired: false
-    // },
+    meta: {
+      authRequired: false
+    },
     component: Login
   },
   {
     path: '/register',
     name: 'Register',
-    // meta: {
-    //   authRequired: false
-    // },
+    meta: {
+      authRequired: false
+    },
     component: Register
   },
 ]
@@ -60,11 +61,11 @@ router.beforeEach((to, from, next) => {
   if (to.meta.authRequired) {
     const jwt = localStorage.getItem('token');
     if (jwt == null) {
-      next('/login')
-      return
+      next('/login');
+      return;
     }
   }
-  next()
+  next();
 })
 
 export default router

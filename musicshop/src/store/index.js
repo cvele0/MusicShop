@@ -12,10 +12,26 @@ export default new Vuex.Store({
     storage: window.sessionStorage,
   })],
   state: {
-    countries: [],
+    instruments: [],
     token: '',
     user: null,
-    loggedIn: false
+    loggedIn: false,
+    // instrumentNames: [
+    //   "Gibson SG",
+    //   "El. gitara Peavey",
+    //   "Klavir C40 Yamaha",
+    //   "Klasicna gitara Alhambra",
+    //   "El. gitara Stratokaster"
+    // ],
+    // instrumentUrls: [
+    //   "https://www.mitrosmusic.com/media/inlineimage/upload_28451_1.jpg",
+    //   "https://www.scmusic.com.au/content/uploads/2015/11/p-25175-PEAVEY-AT200-BLACK-MAIN.jpg",
+    //   "https://www.player.rs/images/products/big/30559.webp",
+    //   "https://www.alhambraguitarras.com/layout/common/_thumb/2304mahoganydelante_ma-480x640-zc2.jpg",
+    //   "https://makingfunmusic.com/wp-content/uploads/2021/02/Fender-Player-Stratocaster-Electric-Guitar-Maple-Fingerboard-Black-Full-Straight-Front.jpg"
+    // ]
+    instrumentNames: [],
+    instrumentUrls: []
   },
   // getters: {
   // },
@@ -38,8 +54,16 @@ export default new Vuex.Store({
       localStorage.token = token;
     },
 
-    setCountries(state, countries) {
-      state.countries = countries;
+    setInstruments(state, instruments) {
+      state.instruments = instruments;
+    },
+
+    setInstrumentNames(state, instrumentNames) {
+      state.instrumentNames = instrumentNames;
+    },
+
+    setInstrumentUrls(state, instrumentUrls) {
+      state.instrumentUrls = instrumentUrls;
     }
   },
   actions: {
@@ -54,6 +78,8 @@ export default new Vuex.Store({
             alert(tkn.msg);
           } else {
             commit('setToken', tkn.token);
+            let user = { name: obj.name, password: obj.password };
+            commit('login', user);
           }
         });
     },
@@ -73,9 +99,9 @@ export default new Vuex.Store({
           }
         });
     },
-    // ako ne radi, uraditi async funkciju
-    fetchCountries({ commit }) {
-      fetch(`${rootPath}/admin/countries`, {
+    
+    fetchInstruments({ commit, state }) {
+      fetch(`${rootPath}/admin/instruments`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +113,43 @@ export default new Vuex.Store({
         if (res.msg) {
           alert(res.msg);
         } else {
-          commit('setCountries', res);
+          commit('setInstruments', res);
+        }
+      });
+    },
+
+    fetchInstrumentNames({ commit, state }) {
+      fetch(`${authPath}/instrumentNames`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${state.token}`
+        }
+      })
+      .then( obj => obj.json() )
+      .then( res => {
+        if (res.msg) {
+          alert(res.msg);
+        } else {
+          commit('setInstrumentNames', res.instrumentNames);
+        }
+      });
+    },
+
+    fetchInstrumentUrls({ commit, state }) {
+      fetch(`${authPath}/instrumentUrls`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${state.token}`
+        }
+      })
+      .then( obj => obj.json() )
+      .then( res => {
+        if (res.msg) {
+          alert(res.msg);
+        } else {
+          commit('setInstrumentUrls', res.instrumentUrls);
         }
       });
     },
@@ -95,6 +157,11 @@ export default new Vuex.Store({
     logout({ commit }) {
       commit('log_out')
     },
+
+    addImage({ commit, state }, name, url) {
+      state.instrumentNames.push(name);
+      state.instrumentUrls.push(url);
+    }
   },
   // modules: {
   // }

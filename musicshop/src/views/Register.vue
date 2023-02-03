@@ -12,10 +12,13 @@
       </b-form-group>
 
       <b-form-group label="Password:" label-for="password">
-        <b-form-input id="password" v-model="form.password" type="password" required></b-form-input>
+        <b-form-input id="password" v-model="form.password" type="password" placeholder="Enter password" required></b-form-input>
       </b-form-group>
 
-      <b-form-checkbox id="admin" v-model="form.admin" :value="true" :unchecked-value="false">Admin</b-form-checkbox>
+      <b-form-group label="Role:" label-for="role">
+        <b-form-input id="role" v-model="form.role" 
+        placeholder="Enter role (user, admin, moderator)" required></b-form-input>
+      </b-form-group>
       
       <br>
       <b-button type="submit" variant="primary">Submit</b-button>
@@ -41,7 +44,7 @@
           email: '',
           name: '',
           password: '',
-          admin: false
+          role: ''
         }
       }
     },

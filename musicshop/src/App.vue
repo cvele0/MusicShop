@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div>
-      <b-navbar toggleable="sm" type="dark" variant="info">
+      <b-navbar toggleable="sm" type="dark" variant="dark">
         <b-navbar-brand to="/">Music shop</b-navbar-brand>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -11,16 +11,8 @@
             <b-nav-item href="/">Home</b-nav-item>
 
             <b-nav-item-dropdown text="Category" right>
-              <b-dropdown-item to="/countries">Countries</b-dropdown-item>
-              <b-dropdown-item to="/customers">Customers</b-dropdown-item>
-              <b-dropdown-item to="/departments">Departments</b-dropdown-item>
-              <b-dropdown-item to="/employees">Employees</b-dropdown-item>
               <b-dropdown-item to="/instruments">Instruments</b-dropdown-item>
               <b-dropdown-item to="/manufacturers">Manufacturers</b-dropdown-item>
-              <b-dropdown-item to="/orders">Orders</b-dropdown-item>
-              <b-dropdown-item to="/products">Products</b-dropdown-item>
-              <b-dropdown-item to="/productOrders">Product Orders</b-dropdown-item>
-              <b-dropdown-item to="/shops">Shops</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
 
@@ -32,10 +24,15 @@
             </b-nav-form>
 
           </b-navbar-nav> -->
-          <b-button v-if="!this.loggedIn" class="me-3" variant="outline-primary" @click="redirectToRegister()">Register</b-button>
-          <b-button v-if="!this.loggedIn" variant="outline-success" @click="redirectToLogin()">Log in</b-button>
-          <!-- <b-button v-if="this.user" variant="outline-success" @click="redirectToProfile()">{{user.name}}</b-button> -->
-          <b-button v-if="this.loggedIn" class="ms-3" variant="outline-danger" @click="log_out()">Log out</b-button>
+          <div class="buttonSettings">
+            <b-button v-if="!this.loggedIn" variant="outline-success" @click="redirectToLogin()">Log in</b-button>
+          </div>
+          <div class="buttonSettings">
+            <b-button v-if="!this.loggedIn" class="me-3" variant="outline-primary" @click="redirectToRegister()">Register</b-button>
+          </div>
+          <div class="buttonSettings">
+            <b-button v-if="this.loggedIn" class="ms-3" variant="outline-danger" @click="log_out()">Log out</b-button>
+          </div>
         </b-collapse>
       </b-navbar>
     </div>
@@ -104,4 +101,11 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+.buttonSettings {
+  margin-left: 10px;
+  margin-right: 10px;
+  justify-content: end;
+}
+
 </style>

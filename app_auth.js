@@ -92,6 +92,28 @@ app.post('/login', (req, res) => {
         .catch( err => res.status(500).json(err) );
 });
 
+app.get('/instrumentNames', (req, res) => {
+    var instrumentNames = [
+        "Gibson SG",
+        "El. gitara Peavey",
+        "Klavir C40 Yamaha",
+        "Klasicna gitara Alhambra",
+        "El. gitara Stratokaster"
+      ];
+      res.json( {instrumentNames: instrumentNames});
+});
+
+app.get('/instrumentUrls', (req, res) => {
+    var instrumentUrls = [
+        "https://www.mitrosmusic.com/media/inlineimage/upload_28451_1.jpg",
+        "https://www.scmusic.com.au/content/uploads/2015/11/p-25175-PEAVEY-AT200-BLACK-MAIN.jpg",
+        "https://www.player.rs/images/products/big/30559.webp",
+        "https://www.alhambraguitarras.com/layout/common/_thumb/2304mahoganydelante_ma-480x640-zc2.jpg",
+        "https://makingfunmusic.com/wp-content/uploads/2021/02/Fender-Player-Stratocaster-Electric-Guitar-Maple-Fingerboard-Black-Full-Straight-Front.jpg"
+      ]
+    res.json( {instrumentUrls: instrumentUrls});
+});
+
 app.listen({ port: 9000 }, async () => {
     await sequelize.authenticate();
 });

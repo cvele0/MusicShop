@@ -148,7 +148,6 @@ app.get('/customer', authToken, (req, res) => {
     res.sendFile(path.join(__dirname, 'static', 'shop.html'));
  });
 
-
 const countryRoutes = require("./routes/country.js");
 app.use("/countries", countryRoutes);
 

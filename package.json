@@ -20,7 +20,6 @@
     "mariadb": "^3.0.2",
     "mysql2": "^2.3.3-rc.0",
     "sequelize": "^6.9.0",
-    "sequelize-cli": "^6.5.2",
-    "vue": "^2.7.14"
+    "sequelize-cli": "^6.5.2"
   }
 }
