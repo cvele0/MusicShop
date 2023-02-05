@@ -5,6 +5,8 @@ import InstrumentView from '../views/InstrumentView.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import SingleInstrumentView from '../views/SingleInstrumentView.vue'
+import ShopView from '../views/ShopView.vue'
+import SingleShopView from '../views/SingleShopView.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +50,22 @@ const routes = [
       authRequired: false
     },
     component: Register
+  },
+  {
+    path: '/shop',
+    name: 'Shop',
+    meta: {
+      authRequired: true
+    },
+    component: ShopView
+  },
+  {
+    path: '/singleShop/:name',
+    name: 'SingleShop',
+    meta: {
+      authRequired: true
+    },
+    component: SingleShopView
   },
 ]
 

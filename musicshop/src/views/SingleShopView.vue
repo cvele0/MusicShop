@@ -20,7 +20,8 @@ export default {
 
   computed: {
     ...mapState([
-      'instruments'
+      'instrumentNames',
+      'instrumentUrls'
     ])
   },
 
@@ -34,19 +35,18 @@ export default {
   methods: {
     ...mapActions([
       'addImage',
-      'fetchInstruments',
+      'fetchInstrumentNames',
+      'fetchInstrumentUrls'
     ])
   },
 
   mounted() {
-    this.fetchInstruments();
+    this.fetchInstrumentNames();
+    this.fetchInstrumentUrls();
     var name = this.$route.params.name;
     this.subtitle = name;
-    for (var i = 0; i < this.instruments.length; i++) {
-      if (this.instruments[i].name === name) {
-        this.imageUrl = this.instruments[i].url;
-      }
-    }
+    var idx = this.instrumentNames.indexOf(name);
+    this.imageUrl = this.instrumentUrls[idx];
   },
 
   watch: {

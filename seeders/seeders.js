@@ -42,6 +42,38 @@ module.exports = {
         }
     ], {});
 
+    await queryInterface.bulkInsert('AvailableInstruments', [
+      {
+        id: 1,
+        name: "Les Paul Tribute",
+        brand: "Gibson",
+        price: 1500,
+        url: "https://images.ctfassets.net/m8onsx4mm13s/0zbHLch9idV77XUCH31zp7/3c42b3dd5d3a1eac31478a1d0214af53/__static.gibson.com_product-images_USA_USAANM97_Satin_Tobacco_Burst_beauty-banner-640_480.png?h=900",
+        description: "The Les Paul Tribute captures the vibe, feel and tonality of a traditional Les Paul and is available in four classic finishes."
+      },{
+        id: 2,
+        name: "Piano NV10",
+        brand: "Kawai",
+        price: 2500,
+        url: "https://lyrastyle.rs/uploads/kawai-novus-nv-10-1_2.jpg",
+        description: "Kawai pianos offer a warmer, fuller quality of tone when compared to a normal piano built by Yamaha."
+      },{
+        id: 3,
+        name: "Violina V5 SC44",
+        brand: "Yamaha",
+        price: 800,
+        url: "https://thumbs.static-thomann.de/thumb/padthumb600x600/pics/bdb/172522/14389014_800.jpg",
+        description: "Violin Solid wood Hand-carved spruce top Maple back Oil-based finish applied with a brush Ebony fingerboard Ebony pegs Wittner"
+      },{
+        id: 4,
+        name: "Pojacalo JTM45 2245",
+        brand: "Marshall",
+        price: 600,
+        url: "https://www.player.rs/images/products/big/26721.webp",
+        description: "Model. JTM45 2245. Range. Vintage reissue. Technology. Valve. Channels. 2 (Split) ; Output wattage. 30W."
+      }
+  ], {});
+
     await queryInterface.bulkInsert('Shops', [
       {
         id: 1,
@@ -101,12 +133,14 @@ await queryInterface.bulkInsert('Instruments', [
     id: 1,
     name: "Gibson SG",
     brand: "Gibson",
+    url: "https://www.mitrosmusic.com/media/inlineimage/upload_28451_1.jpg",
     manufacturerID: 1,
     shopID: 2
   },{
     id: 2,
     name: "El. gitara Peavey",
     brand: "Peavey",
+    url: "https://www.scmusic.com.au/content/uploads/2015/11/p-25175-PEAVEY-AT200-BLACK-MAIN.jpg",
     manufacturerID: 2,
     shopID: 2
   },
@@ -114,6 +148,7 @@ await queryInterface.bulkInsert('Instruments', [
     id: 3,
     name: "Klavir C40 Yamaha",
     brand: "Yamaha",
+    url: "https://www.player.rs/images/products/big/30559.webp",
     manufacturerID: 3,
     shopID: 5
   },
@@ -121,6 +156,7 @@ await queryInterface.bulkInsert('Instruments', [
     id: 4,
     name: "Klasicna gitara Alhambra",
     brand: "Alhambra",
+    url: "https://www.alhambraguitarras.com/layout/common/_thumb/2304mahoganydelante_ma-480x640-zc2.jpg",
     manufacturerID: 5,
     shopID: 2
   },
@@ -128,6 +164,7 @@ await queryInterface.bulkInsert('Instruments', [
     id: 5,
     name: "El. gitara Stratokaster",
     brand: "Stratokaster",
+    url: "https://makingfunmusic.com/wp-content/uploads/2021/02/Fender-Player-Stratocaster-Electric-Guitar-Maple-Fingerboard-Black-Full-Straight-Front.jpg",
     manufacturerID: 4,
     shopID: 2
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Header subtitle="Instruments"/>
+    <Header subtitle="Owned Instruments"/>
     <!-- <InstrumentImageList v-if="this.myInstruments" :objects="this.myInstruments" />  -->
     <InstrumentImageList />
     <!-- <h1 v-else> Error load instruments </h1> -->

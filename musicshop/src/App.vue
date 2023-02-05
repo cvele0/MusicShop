@@ -8,13 +8,15 @@
 
         <b-collapse id="nav-collapse" is-nav>
           <b-navbar-nav>
-            <b-nav-item href="/">Home</b-nav-item>
+            <b-nav-item to="/">Home</b-nav-item>
 
             <b-nav-item-dropdown text="Category" right>
               <b-dropdown-item to="/instruments">Instruments</b-dropdown-item>
-              <b-dropdown-item to="/manufacturers">Manufacturers</b-dropdown-item>
             </b-nav-item-dropdown>
+
+            <b-nav-item class="Shop" to="/shop">Shop</b-nav-item>
           </b-navbar-nav>
+
 
           <!-- Right aligned nav items -->
           <!-- <b-navbar-nav class="ml-auto">
@@ -34,6 +36,8 @@
             <b-button v-if="this.loggedIn" class="ms-3" variant="outline-danger" @click="log_out()">Log out</b-button>
           </div>
         </b-collapse>
+
+
       </b-navbar>
     </div>
     <router-view/>

@@ -26,6 +26,7 @@ const orders = require('./routes/order');
 const products = require('./routes/product');
 const productOrders = require('./routes/productOrder');
 const shops = require('./routes/shop');
+const availableInstruments = require('./routes/availableInstrument');
 
 app.use('/admin', countries);
 app.use('/admin', customers);
@@ -37,6 +38,7 @@ app.use('/admin', orders);
 app.use('/admin', products);
 app.use('/admin', productOrders);
 app.use('/admin', shops);
+app.use('/admin', availableInstruments);
 
 app.listen({ port: 9090 }, async () => {
   await sequelize.authenticate();

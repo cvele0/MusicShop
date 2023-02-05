@@ -16,8 +16,9 @@ export default new Vuex.Store({
     token: '',
     user: null,
     loggedIn: false,
-    instrumentNames: [],
-    instrumentUrls: []
+    // instrumentNames: [],
+    // instrumentUrls: [],
+    availableInstruments: []
   },
 
   mutations: {
@@ -43,12 +44,16 @@ export default new Vuex.Store({
       state.instruments = instruments;
     },
 
-    setInstrumentNames(state, instrumentNames) {
-      state.instrumentNames = instrumentNames;
-    },
+    // setInstrumentNames(state, instrumentNames) {
+    //   state.instrumentNames = instrumentNames;
+    // },
 
-    setInstrumentUrls(state, instrumentUrls) {
-      state.instrumentUrls = instrumentUrls;
+    // setInstrumentUrls(state, instrumentUrls) {
+    //   state.instrumentUrls = instrumentUrls;
+    // },
+
+    setAvailableInstruments(state, availableInstruments) {
+      state.availableInstruments = availableInstruments;
     }
   },
   actions: {
@@ -80,7 +85,9 @@ export default new Vuex.Store({
             alert(tkn.msg);
           } else {
             commit('setToken', tkn.token);
-            commit('login', obj);
+            if (tkn.token) {
+              commit('login', obj);
+            }
           }
         });
     },
@@ -100,11 +107,47 @@ export default new Vuex.Store({
         } else {
           commit('setInstruments', res);
         }
-      });
+      })
     },
 
-    fetchInstrumentNames({ commit, state }) {
-      fetch(`${authPath}/instrumentNames`, {
+    // fetchInstrumentNames({ commit, state }) {
+    //   fetch(`${authPath}/instrumentNames`, {
+    //     method: 'GET',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `Bearer ${state.token}`
+    //     }
+    //   })
+    //   .then( obj => obj.json() )
+    //   .then( res => {
+    //     if (res.msg) {
+    //       alert(res.msg);
+    //     } else {
+    //       commit('setInstrumentNames', res.instrumentNames);
+    //     }
+    //   });
+    // },
+
+    // fetchInstrumentUrls({ commit, state }) {
+    //   fetch(`${authPath}/instrumentUrls`, {
+    //     method: 'GET',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `Bearer ${state.token}`
+    //     }
+    //   })
+    //   .then( obj => obj.json() )
+    //   .then( res => {
+    //     if (res.msg) {
+    //       alert(res.msg);
+    //     } else {
+    //       commit('setInstrumentUrls', res.instrumentUrls);
+    //     }
+    //   });
+    // },
+
+    fetchAvailableInstruments({ commit, state }) {
+      fetch(`${rootPath}/admin/availableInstruments`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -116,25 +159,7 @@ export default new Vuex.Store({
         if (res.msg) {
           alert(res.msg);
         } else {
-          commit('setInstrumentNames', res.instrumentNames);
-        }
-      });
-    },
-
-    fetchInstrumentUrls({ commit, state }) {
-      fetch(`${authPath}/instrumentUrls`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${state.token}`
-        }
-      })
-      .then( obj => obj.json() )
-      .then( res => {
-        if (res.msg) {
-          alert(res.msg);
-        } else {
-          commit('setInstrumentUrls', res.instrumentUrls);
+          commit('setAvailableInstruments', res);
         }
       });
     },

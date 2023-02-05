@@ -1,12 +1,13 @@
 <template>
-  <div class="table">
+  <div>
     <b-table 
      :items="this.myInstruments"
-     bordered
-     stripped
      small 
      fixed 
      hover 
+     dark
+     bordered
+     stripped
      @row-clicked="rowClicked">
     </b-table>
   </div>
@@ -15,7 +16,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 export default {
-  name: 'CountryImageList',
+  name: 'ShopImageList',
   
   // props: {
   //   objects: Array
@@ -23,7 +24,7 @@ export default {
 
   computed: {
     ...mapState([
-      'instruments',
+      'availableInstruments'
     ]),
   },
 
@@ -35,25 +36,23 @@ export default {
 
   mounted() {
     if (localStorage.token) {
-      this.fetchInstruments();
+      this.fetchAvailableInstruments();
       this.myInstruments = [];
-      for (var i = 0; i < this.instruments.length; i++) {
-        var obj = { name: this.instruments[i].name, brand: this.instruments[i].brand };
+      for (var i = 0; i < this.availableInstruments.length; i++) {
+        var obj = { name: this.availableInstruments[i].name, brand: this.availableInstruments[i].brand };
         this.myInstruments.push(obj);
       }
     }
   },
 
   watch: {
-    instruments(nval) {
-      if (localStorage.token) {
-        this.myInstruments = [];
-        for (var i = 0; i < nval.length; i++) {
-          var obj = { name: nval[i].name, brand: nval[i].brand };
-          this.myInstruments.push(obj);
-        }
-      }
-    }
+    // instruments(nval) {
+    //   this.myInstruments = [];
+    //   for (var i = 0; i < nval.length; i++) {
+    //     var obj = { name: nval[i].name, brand: nval[i].brand };
+    //     this.myInstruments.push(obj);
+    //   }
+    // }
   },
 
   methods: {
@@ -62,7 +61,7 @@ export default {
     ]),
 
     rowClicked(record, index) {
-      this.$router.push( {name: 'SingleInstrument', params: {name: record.name} } )
+      this.$router.push( {name: 'SingleShop', params: {name: record.name} } )
     }
   }
 }
@@ -70,7 +69,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* .table {
-  background-color: rgb(193, 232, 193);
-} */
+
 </style>
