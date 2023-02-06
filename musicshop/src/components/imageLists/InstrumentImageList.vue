@@ -1,6 +1,6 @@
 <template>
   <div class="table">
-    <b-table 
+    <b-table
      :items="this.myInstruments"
      bordered
      stripped

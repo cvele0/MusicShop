@@ -1,15 +1,6 @@
 <template>
   <div class="home">
     <Header :subtitle="subtitle"/>
-    <!-- <div class="order">
-      <div class="small-container" style="text-align: left;">
-        <img class="small-image" v-bind="imageUrl" v-if="imageUrl.length > 0" :src="imageUrl">
-      </div>
-    </div>
-    <div class="image">
-      <img v-bind="imageUrl" v-if="imageUrl.length > 0" :src="imageUrl">
-      <h1 v-else> Error loading image </h1>
-    </div> -->
     <div class="image">
       <img class="inside-image" v-bind="imageUrl" v-if="imageUrl.length > 0" :src="imageUrl">
       <h1 v-else> Error loading image </h1>
@@ -32,7 +23,7 @@
         </div>
         <div class="price">
           <h1> Price: {{ this.price }}$</h1>
-          <b-button class="button" variant="success">Order</b-button>
+          <b-button class="button" type="submit" squared variant="outline-info" @click="buttonClicked()">Order</b-button>
         </div>
       </div> 
     </body>
@@ -52,7 +43,8 @@ export default {
 
   computed: {
     ...mapState([
-      'availableInstruments'
+      'availableInstruments',
+      'instruments'
     ])
   },
 
@@ -68,9 +60,24 @@ export default {
 
   methods: {
     ...mapActions([
-      'addImage',
-      'fetchAvailableInstruments'
-    ])
+      'fetchAvailableInstruments',
+      'addInstrument',
+      'deleteAvailableInstrument'
+    ]),
+
+    buttonClicked() {
+      var instrument = null;
+      var name = this.$route.params.name;
+      for (var i = 0; i < this.availableInstruments.length; i++) {
+        if (this.availableInstruments[i].name === name) {
+          instrument = this.availableInstruments[i];
+        }
+      }
+      if (instrument === null) return;
+      this.deleteAvailableInstrument(instrument);
+      this.addInstrument(instrument);
+      this.$router.push({ name: 'Shop' });
+    }
   },
 
   mounted() {

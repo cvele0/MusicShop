@@ -46,13 +46,13 @@ export default {
   },
 
   watch: {
-    // instruments(nval) {
-    //   this.myInstruments = [];
-    //   for (var i = 0; i < nval.length; i++) {
-    //     var obj = { name: nval[i].name, brand: nval[i].brand };
-    //     this.myInstruments.push(obj);
-    //   }
-    // }
+    availableInstruments(nval) {
+      this.myInstruments = [];
+      for (var i = 0; i < nval.length; i++) {
+        var obj = { name: nval[i].name, brand: nval[i].brand };
+        this.myInstruments.push(obj);
+      }
+    }
   },
 
   methods: {

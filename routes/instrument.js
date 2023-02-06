@@ -34,7 +34,8 @@ route.get('/instruments', (req, res) => {
 route.post('/instruments', (req, res) => {
     Instrument.create({ 
                       name: req.body.name,
-                      brand: req.body.brand
+                      brand: req.body.brand,
+                      url: req.body.url
                     })
                     .then( rows => res.json(rows) )
                     .catch( err => res.status(500).json(err) );

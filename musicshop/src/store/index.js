@@ -54,6 +54,23 @@ export default new Vuex.Store({
 
     setAvailableInstruments(state, availableInstruments) {
       state.availableInstruments = availableInstruments;
+    },
+
+    deleteAvailableInstrument(state, availableInstrument) {
+      var newAvailable = [];
+      for (var i = 0; i < state.availableInstruments.length; i++) {
+        if (state.availableInstruments[i].name === availableInstrument.name && 
+            state.availableInstruments[i].brand === availableInstrument.brand) {
+          continue;
+        } else {
+          newAvailable.push(state.availableInstruments[i]);
+        }
+      }
+      state.availableInstruments = newAvailable;
+    },
+
+    addInstrument(state, instrument) {
+      state.instruments.push(instrument);
     }
   },
   actions: {
@@ -110,41 +127,43 @@ export default new Vuex.Store({
       })
     },
 
-    // fetchInstrumentNames({ commit, state }) {
-    //   fetch(`${authPath}/instrumentNames`, {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': `Bearer ${state.token}`
-    //     }
-    //   })
-    //   .then( obj => obj.json() )
-    //   .then( res => {
-    //     if (res.msg) {
-    //       alert(res.msg);
-    //     } else {
-    //       commit('setInstrumentNames', res.instrumentNames);
-    //     }
-    //   });
-    // },
+    deleteAvailableInstrument({ commit, state }, data) {
+      fetch(`${rootPath}/admin/availableInstruments`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${state.token}`
+        },
+        body: JSON.stringify(data)
+      })
+      .then( obj => obj.json() )
+      .then( res => {
+        if (res.msg) {
+          alert(res.msg);
+        } else {
+          commit('deleteAvailableInstrument', data);
+        }
+      })
+    },
 
-    // fetchInstrumentUrls({ commit, state }) {
-    //   fetch(`${authPath}/instrumentUrls`, {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': `Bearer ${state.token}`
-    //     }
-    //   })
-    //   .then( obj => obj.json() )
-    //   .then( res => {
-    //     if (res.msg) {
-    //       alert(res.msg);
-    //     } else {
-    //       commit('setInstrumentUrls', res.instrumentUrls);
-    //     }
-    //   });
-    // },
+    addInstrument({ commit, state }, data) {
+      fetch(`${rootPath}/admin/instruments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${state.token}`
+        },
+        body: JSON.stringify(data)
+      })
+      .then( obj => obj.json() )
+      .then( res => {
+        if (res.msg) {
+          alert(res.msg);
+        } else {
+          commit('addInstrument', data);
+        }
+      })
+    },
 
     fetchAvailableInstruments({ commit, state }) {
       fetch(`${rootPath}/admin/availableInstruments`, {
@@ -166,11 +185,6 @@ export default new Vuex.Store({
 
     logout({ commit }) {
       commit('log_out')
-    },
-
-    addImage({ commit, state }, name, url) {
-      state.instrumentNames.push(name);
-      state.instrumentUrls.push(url);
     }
   },
   // modules: {
