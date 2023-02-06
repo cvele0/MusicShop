@@ -12,7 +12,7 @@ import InstrumentImageList from '@/components/imageLists/InstrumentImageList.vue
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: 'InstrumentView',
+  name: 'SingleInstrumentView',
   components: {
     Header,
     InstrumentImageList

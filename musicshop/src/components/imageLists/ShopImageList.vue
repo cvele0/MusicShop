@@ -57,7 +57,7 @@ export default {
 
   methods: {
     ...mapActions([
-      'fetchInstruments'
+      'fetchAvailableInstruments'
     ]),
 
     rowClicked(record, index) {

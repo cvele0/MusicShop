@@ -15,7 +15,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 export default {
-  name: 'CountryImageList',
+  name: 'InstrumentImageList',
   
   // props: {
   //   objects: Array
