@@ -59,44 +59,72 @@ module.exports = {
         description: "Kawai pianos offer a warmer, fuller quality of tone when compared to a normal piano built by Yamaha."
       },{
         id: 3,
-        name: "Violina V5 SC44",
+        name: "Violin V5 SC44",
         brand: "Yamaha",
         price: 800,
         url: "https://thumbs.static-thomann.de/thumb/padthumb600x600/pics/bdb/172522/14389014_800.jpg",
         description: "Violin Solid wood Hand-carved spruce top Maple back Oil-based finish applied with a brush Ebony fingerboard Ebony pegs Wittner"
       },{
         id: 4,
-        name: "Pojacalo JTM45 2245",
+        name: "Amplifier JTM45 2245",
         brand: "Marshall",
         price: 600,
         url: "https://www.player.rs/images/products/big/26721.webp",
         description: "Model. JTM45 2245. Range. Vintage reissue. Technology. Valve. Channels. 2 (Split) ; Output wattage. 30W."
+      },{
+        id: 5,
+        name: "Masters Muple Gum 22",
+        brand: "Pearl",
+        price: 1200,
+        url: "https://media.sweetwater.com/api/i/q-82__ha-b57d1157840f5bb4__hmac-1c934519bf46b5262f51977ca68bc0c9cee47a27/images/items/750/DM7PC-RB-large.jpg",
+        description: "This Pearl Decade Maple Drum Set is an excellent kit. The Redburst is a great color and the drums sound outstanding."
+      },{
+        id: 6,
+        name: "Flute JFL700WE",
+        brand: "Jupiter",
+        price: 500,
+        url: "https://www.fluteworld.com/wp-content/uploads/2019/10/JFL700WE-600x390.jpg",
+        description: "Plateau (closed hole) model with Waveline Technology headjoint, one-piece body to low C, assembly alignment indicators, split E mechanism"
+      },{
+        id: 7,
+        name: "Bass guitar GSR200-BK",
+        brand: "Jupiter",
+        price: 400,
+        url: "https://thumbs.static-thomann.de/thumb/padthumb600x600/pics/bdb/147685/7182268_800.jpg",
+        description: "Electric Bass Body: Poplar Neck: GSR4 Maple Fretboard: Jatoba Scale: Long scale Matching headstock Pickups: 1 J-Style and 1 P-Style Single Coil Active"
+      },{
+        id: 8,
+        name: "Silent Electric Violin SV-255",
+        brand: "Yamaha",
+        price: 2100,
+        url: "https://thumbs.static-thomann.de/thumb/padthumb600x600/pics/bdb/247291/12343757_800.jpg",
+        description: "Silent Violin 5-string The traditional oval shaped neck gives a natural feel Weight similar to an acoustic violin (approx. 500g) Spruce top Ebony"
       }
   ], {});
 
     await queryInterface.bulkInsert('Shops', [
       {
         id: 1,
-        name: "Flaute",
+        name: "Flutes",
         location: "Bulevar Djindjica"
       },{
         id: 2,
-        name: "Gitare",
+        name: "Guitars",
         location: "Vidovdanska"
       },
       {
         id: 3,
-        name: "Bubnjevi",
+        name: "Drums",
         location: "Kasperova"
       },
       {
         id: 4,
-        name: "Violine",
+        name: "Violins",
         location: "Cosiceva"
       },
       {
         id: 5,
-        name: "Klaviri",
+        name: "Pianos",
         location: "Andriceva"
       }
   ], {});
@@ -104,26 +132,26 @@ module.exports = {
   await queryInterface.bulkInsert('Departments', [
     {
       id: 1,
-      type: "Elektricne",
+      type: "Electrical",
       shopID: 2
     },{
       id: 2,
-      type: "Cinele",
+      type: "Cymbals",
       shopID: 3
     },
     {
       id: 3,
-      type: "Klasicne",
+      type: "Classical",
       shopID: 4
     },
     {
       id: 4,
-      type: "Akusticne",
+      type: "Acoustic",
       shopID: 2
     },
     {
       id: 5,
-      type: "Elektricni",
+      type: "Electrical",
       shopID: 5
     },
 ], {});
@@ -138,7 +166,7 @@ await queryInterface.bulkInsert('Instruments', [
     shopID: 2
   },{
     id: 2,
-    name: "El. gitara Peavey",
+    name: "El. guitar Peavey",
     brand: "Peavey",
     url: "https://www.scmusic.com.au/content/uploads/2015/11/p-25175-PEAVEY-AT200-BLACK-MAIN.jpg",
     manufacturerID: 2,
@@ -146,7 +174,7 @@ await queryInterface.bulkInsert('Instruments', [
   },
   {
     id: 3,
-    name: "Klavir C40 Yamaha",
+    name: "Piano C40 Yamaha",
     brand: "Yamaha",
     url: "https://www.player.rs/images/products/big/30559.webp",
     manufacturerID: 3,
@@ -154,7 +182,7 @@ await queryInterface.bulkInsert('Instruments', [
   },
   {
     id: 4,
-    name: "Klasicna gitara Alhambra",
+    name: "Classical guitar Alhambra",
     brand: "Alhambra",
     url: "https://www.alhambraguitarras.com/layout/common/_thumb/2304mahoganydelante_ma-480x640-zc2.jpg",
     manufacturerID: 5,
@@ -162,8 +190,8 @@ await queryInterface.bulkInsert('Instruments', [
   },
   {
     id: 5,
-    name: "El. gitara Stratokaster",
-    brand: "Stratokaster",
+    name: "El. guitar Stratocaster",
+    brand: "Stratocaster",
     url: "https://makingfunmusic.com/wp-content/uploads/2021/02/Fender-Player-Stratocaster-Electric-Guitar-Maple-Fingerboard-Black-Full-Straight-Front.jpg",
     manufacturerID: 4,
     shopID: 2
@@ -173,10 +201,10 @@ await queryInterface.bulkInsert('Instruments', [
 await queryInterface.bulkInsert('Countries', [
   {
     id: 1,
-    country: "Amerika"
+    country: "America"
   },{
     id: 2,
-    country: "Spanija"
+    country: "Spain"
   },
   {
     id: 3,
@@ -188,7 +216,7 @@ await queryInterface.bulkInsert('Countries', [
   },
   {
     id: 5,
-    country: "Kina"
+    country: "China"
   },
 ], {});
 

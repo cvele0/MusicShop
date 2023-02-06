@@ -2,7 +2,7 @@
   <div class="home">
     <Header :subtitle="subtitle"/>
     <div class="image">
-      <img class="inside-image" v-bind="imageUrl" v-if="imageUrl.length > 0" :src="imageUrl">
+      <img class="inside-image" v-if="imageUrl.length > 0" :src="imageUrl">
       <h1 v-else> Error loading image </h1>
     </div>
     <body>

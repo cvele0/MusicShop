@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Header :subtitle="subtitle"/>
-    <img class="image" v-bind="imageUrl" v-if="imageUrl.length > 0" :src="imageUrl">
+    <img class="image" v-if="imageUrl.length > 0" :src="imageUrl">
     <h1 v-else> Error loading image </h1>
   </div>
 </template>
