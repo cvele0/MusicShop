@@ -31,10 +31,10 @@ route.get('/availableInstruments', (req, res) => {
         .catch( err => res.status(500).json(err) );
 });
 
-route.delete('/availableInstruments', async (req, res) => {
-    const instrument = await AvailableInstruments.findOne({ where: { name: req.body.name, brand: req.body.brand } });
-    instrument.destroy();
-    res.send(instrument);
-})
+// route.delete('/availableInstruments', async (req, res) => {
+//     const instrument = await AvailableInstruments.findOne({ where: { name: req.body.name, brand: req.body.brand } });
+//     instrument.destroy();
+//     res.send(instrument);
+// })
 
 module.exports = route;

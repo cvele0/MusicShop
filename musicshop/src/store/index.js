@@ -117,43 +117,43 @@ export default new Vuex.Store({
       })
     },
 
-    deleteAvailableInstrument({ commit, state }, data) {
-      fetch(`${rootPath}/admin/availableInstruments`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${state.token}`
-        },
-        body: JSON.stringify(data)
-      })
-      .then( obj => obj.json() )
-      .then( res => {
-        if (res.msg) {
-          alert(res.msg);
-        } else {
-          commit('deleteAvailableInstrument', data);
-        }
-      })
-    },
+    // deleteAvailableInstrument({ commit, state }, data) {
+    //   fetch(`${rootPath}/admin/availableInstruments`, {
+    //     method: 'DELETE',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `Bearer ${state.token}`
+    //     },
+    //     body: JSON.stringify(data)
+    //   })
+    //   .then( obj => obj.json() )
+    //   .then( res => {
+    //     if (res.msg) {
+    //       alert(res.msg);
+    //     } else {
+    //       commit('deleteAvailableInstrument', data);
+    //     }
+    //   })
+    // },
 
-    addInstrument({ commit, state }, data) {
-      fetch(`${rootPath}/admin/instruments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${state.token}`
-        },
-        body: JSON.stringify(data)
-      })
-      .then( obj => obj.json() )
-      .then( res => {
-        if (res.msg) {
-          alert(res.msg);
-        } else {
-          commit('addInstrument', data);
-        }
-      })
-    },
+    // addInstrument({ commit, state }, data) {
+    //   fetch(`${rootPath}/admin/instruments`, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': `Bearer ${state.token}`
+    //     },
+    //     body: JSON.stringify(data)
+    //   })
+    //   .then( obj => obj.json() )
+    //   .then( res => {
+    //     if (res.msg) {
+    //       alert(res.msg);
+    //     } else {
+    //       commit('addInstrument', data);
+    //     }
+    //   })
+    // },
 
     fetchAvailableInstruments({ commit, state }) {
       fetch(`${rootPath}/admin/availableInstruments`, {
@@ -180,6 +180,11 @@ export default new Vuex.Store({
     socket_instrument({ commit }, instrument) {
       const inst = JSON.parse(instrument);
       commit('addInstrument', inst);
+    },
+
+    socket_available({ commit }, instrument) {
+      const inst = JSON.parse(instrument);
+      commit('deleteAvailableInstrument', inst);
     }
   },
   // modules: {

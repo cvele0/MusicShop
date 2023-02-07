@@ -1,5 +1,5 @@
 const express = require('express');
-const { sequelize, Instrument } = require('./models');
+const { sequelize, Instrument, AvailableInstruments } = require('./models');
 const msgs = require('./routes/messages');
 const path = require('path');
 const jwt = require('jsonwebtoken');
@@ -63,13 +63,11 @@ io.on('connection', socket => {
           .catch( err => res.status(500).json(err) );
     });
 
-    // socket.on('comment', msg => {
-    //     Messages.create({ body: msg.body, artId: msg.artId, userId: msg.user.userId })
-    //         .then( rows => {
-    //             Messages.findOne({ where: { id: rows.id }, include: ['user'] })
-    //                 .then( msg => io.emit('comment', JSON.stringify(msg)) ) 
-    //         }).catch( err => res.status(500).json(err) );
-    // });
+    socket.on('available', async ins => {
+        const instrument = await AvailableInstruments.findOne({ where: { name: ins.name, brand: ins.brand } });
+        io.emit('available', JSON.stringify(instrument));
+        instrument.destroy();
+    });
 
     socket.on('error', err => socket.emit('error', err.message));
 })

@@ -75,7 +75,9 @@ export default {
         }
       }
       if (instrument === null) return;
-      this.deleteAvailableInstrument(instrument);
+      // this.deleteAvailableInstrument(instrument);
+      this.$socket.emit('available', {name: instrument.name, 
+        brand: instrument.brand, url: instrument.url, token: this.token});
       //this.addInstrument(instrument);
       this.$socket.emit('instrument', {name: instrument.name, 
         brand: instrument.brand, url: instrument.url, token: this.token});
