@@ -34,7 +34,7 @@ export default {
 }
 .nine h1 span {
   margin-top: 5px;
-    font-size:15px; color:#444; word-spacing:1px; font-weight:normal; letter-spacing:2px;
+    font-size:17px; color:#444; word-spacing:1px; font-weight:normal; letter-spacing:2px;
     text-transform: uppercase; font-family:"Raleway", sans-serif; font-weight:500;
 
     display: grid;

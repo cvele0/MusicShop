@@ -1,20 +1,78 @@
 const express = require('express');
-const { sequelize } = require('./models');
+const { sequelize, Instrument } = require('./models');
 const msgs = require('./routes/messages');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 require('dotenv').config();
+const http = require('http');
+const { Server } = require('socket.io');
 
-const app = express();
+const app = express(); 
 
 const corsOptions ={
-    origin:'*', 
-    credentials:true,            //access-control-allow-credentials:true
+    origin:'http://127.0.0.1:8080', 
+    //credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200,
  }
 
- app.use(cors(corsOptions));
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: 'http://127.0.0.1:8080',
+        methods: ['GET', 'POST'],
+        credentials: true
+    },
+    allowEIO3: true
+});
+
+// var corsOptions = {
+//     origin: '*',
+//     optionsSuccessStatus: 200
+// }
+
+app.use(cors(corsOptions));
+
+function authSocket(msg, next) {
+    if (msg[1].token == null) {
+        next(new Error("Not authenticated"));
+    } else {
+        jwt.verify(msg[1].token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+            if (err) {
+                next(new Error(err));
+            } else {
+                msg[1].user = user;
+                next();
+            }
+        });
+    }
+}
+
+io.on('connection', socket => {
+    socket.use(authSocket);
+    socket.on('instrument', instrument => {
+        Instrument.create({ 
+            name: instrument.name,
+            brand: instrument.brand,
+            url: instrument.url
+          })
+          .then( rows => {
+            Instrument.findOne({ where: { name: rows.name, brand: rows.brand } })
+                .then( instr => io.emit('instrument', JSON.stringify(instr)) )
+          })
+          .catch( err => res.status(500).json(err) );
+    });
+
+    // socket.on('comment', msg => {
+    //     Messages.create({ body: msg.body, artId: msg.artId, userId: msg.user.userId })
+    //         .then( rows => {
+    //             Messages.findOne({ where: { id: rows.id }, include: ['user'] })
+    //                 .then( msg => io.emit('comment', JSON.stringify(msg)) ) 
+    //         }).catch( err => res.status(500).json(err) );
+    // });
+
+    socket.on('error', err => socket.emit('error', err.message));
+})
 
 app.use('/admin', msgs);
 
@@ -180,6 +238,6 @@ app.use("/shops", shopRoutes);
 
 app.use(express.static(path.join(__dirname, 'static')));
 
-app.listen({ port: 8000 }, async () => {
+server.listen({ port: 8000 }, async () => {
     await sequelize.authenticate();
 });

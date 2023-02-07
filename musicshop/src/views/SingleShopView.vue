@@ -44,7 +44,8 @@ export default {
   computed: {
     ...mapState([
       'availableInstruments',
-      'instruments'
+      'instruments',
+      'token'
     ])
   },
 
@@ -75,7 +76,9 @@ export default {
       }
       if (instrument === null) return;
       this.deleteAvailableInstrument(instrument);
-      this.addInstrument(instrument);
+      //this.addInstrument(instrument);
+      this.$socket.emit('instrument', {name: instrument.name, 
+        brand: instrument.brand, url: instrument.url, token: this.token});
       this.$router.push({ name: 'Shop' });
     }
   },

@@ -16,8 +16,6 @@ export default new Vuex.Store({
     token: '',
     user: null,
     loggedIn: false,
-    // instrumentNames: [],
-    // instrumentUrls: [],
     availableInstruments: []
   },
 
@@ -43,14 +41,6 @@ export default new Vuex.Store({
     setInstruments(state, instruments) {
       state.instruments = instruments;
     },
-
-    // setInstrumentNames(state, instrumentNames) {
-    //   state.instrumentNames = instrumentNames;
-    // },
-
-    // setInstrumentUrls(state, instrumentUrls) {
-    //   state.instrumentUrls = instrumentUrls;
-    // },
 
     setAvailableInstruments(state, availableInstruments) {
       state.availableInstruments = availableInstruments;
@@ -185,6 +175,11 @@ export default new Vuex.Store({
 
     logout({ commit }) {
       commit('log_out')
+    },
+
+    socket_instrument({ commit }, instrument) {
+      const inst = JSON.parse(instrument);
+      commit('addInstrument', inst);
     }
   },
   // modules: {
